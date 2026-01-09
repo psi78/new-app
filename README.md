@@ -2,10 +2,6 @@
 
 A complete web-based system for managing university dormitory allocations, student applications, and room administration.
 
-## 🚀 Live Demo
-The application is deployed and running live on Render:
-**[https://dms-app-klpm.onrender.com](https://dms-app-klpm.onrender.com)**
-
 ---
 
 ## 🔑 Login Credentials
@@ -26,8 +22,7 @@ The application is deployed and running live on Render:
 ## 🛠️ Tech Stack
 *   **Frontend:** HTML5, CSS3, Vanilla JavaScript (No frameworks)
 *   **Backend:** Node.js (Express.js)
-*   **Database:** MySQL (Hosted on Clever Cloud)
-*   **Hosting:** Render (Web Service)
+*   **Database:** MySQL
 
 ## 📁 Project Structure
 *   `/j/server.js`: Main backend logic.

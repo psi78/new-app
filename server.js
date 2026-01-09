@@ -425,6 +425,10 @@ app.get("/api/fixCloud", async (req, res) => {
     console.log("Manual fix triggered...");
     await initDb();
 
+    // Force update sysadmin permissions to include SYS_ADMIN
+    await query(`UPDATE admin_registry SET perms = ? WHERE admin_id = 'sysadmin'`,
+      [JSON.stringify(["HOME", "SYS_ADMIN"])]);
+
     // Check if sysadmin exists now
     const users = await query("SELECT * FROM admin_registry");
     res.json({

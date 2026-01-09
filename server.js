@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 const { query, testConnection } = require("./database/config");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Debug logging to file since we can't see the console
 async function logToFile(msg) {

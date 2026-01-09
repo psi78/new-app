@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | 5K DMS</title>
+    <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/main.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            if (!Auth || !Auth.validateSession()) {
+                window.location.href = 'student-login.html';
+                return;
+            }
+            
+            const user = Auth.getCurrentUser();
+            
+            populateProfileForm(user);
+            
+            initializeProfileForm();
+            
+            setupLogout();
+            
+            setupNavigation();
+        });
+
+        function populateProfileForm(user) {
+            document.querySelector('input[value="STU_001"]').value = user.studentId || 'STU_001';
+            document.querySelector('input[value="Dawit Alemu"]').value = user.fullName || 'Dawit Alemu';
+            
+            const genderSelect = document.querySelector('select[name="gender"]');
+            if (genderSelect) {
+                genderSelect.value = user.gender || 'Male';
+            }
+            
+            const deptSelect = document.querySelector('select[name="department"]');
+            if (deptSelect && user.department) {
+                deptSelect.value = user.department;
+            }
+            
+            const yearInput = document.querySelector('input[type="number"]');
+            if (yearInput) {
+                yearInput.value = user.academicYear || 2;
+            }
+            
+            const phoneInput = document.querySelector('input[type="tel"]');
+            if (phoneInput) {
+                phoneInput.value = user.phone || '+251 9XX XXX XXX';
+            }
+        }
+
+        function initializeProfileForm() {
+            const form = document.getElementById('profileForm');
+            const saveButton = document.querySelector('.savechange-btn');
+            const fileInput = document.getElementById('fileInput');
+            const profileDisplay = document.getElementById('profileDisplay');
+            
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (file.size > 5 * 1024 * 1024) {
+                        showAlert('File size must be less than 5MB', 'error');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profileDisplay.src = e.target.result;
+                        localStorage.setItem('profile_picture', e.target.result);
+                        showAlert('Profile picture updated successfully', 'success');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            const savedPicture = localStorage.getItem('profile_picture');
+            if (savedPicture) {
+                profileDisplay.src = savedPicture;
+            }
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                saveButton.disabled = true;
+                const originalText = saveButton.textContent;
+                saveButton.innerHTML = '<span class="spinner"></span> Saving...';
+                
+                try {
+                    const formData = new FormData(form);
+                    formData.append('student_id', Auth.getCurrentUser().studentId);
+                    formData.append('update_timestamp', new Date().toISOString());
+                    
+                    const updatedData = {
+                        fullName: form.querySelector('input[value]:not(.readonly-field)').value,
+                        gender: form.querySelector('select[name="gender"]').value,
+                        department: form.querySelector('select[name="department"]').value,
+                        academicYear: form.querySelector('input[type="number"]').value,
+                        phone: form.querySelector('input[type="tel"]').value
+                    };
+                    
+                    localStorage.setItem('full_name', updatedData.fullName);
+                    localStorage.setItem('gender', updatedData.gender);
+                    localStorage.setItem('department', updatedData.department);
+                    localStorage.setItem('academic_year', updatedData.academicYear);
+                    localStorage.setItem('phone', updatedData.phone);
+                    
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    showAlert('Profile updated successfully!', 'success');
+                    
+                } catch (error) {
+                    console.error('Update error:', error);
+                    showAlert('Failed to update profile. Please try again.', 'error');
+                } finally {
+                    saveButton.disabled = false;
+                    saveButton.textContent = originalText;
+                }
+            });
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .spinner {
+                    display: inline-block;
+                    width: 12px;
+                    height: 12px;
+                    border: 2px solid rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    border-top-color: #fff;
+                    animation: spin 1s ease-in-out infinite;
+                    margin-right: 8px;
+                }
+                
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function setupLogout() {
+            const logoutLink = document.querySelector('.logout');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (confirm('Are you sure you want to logout?')) {
+                        Auth.logout();
+                    }
+                });
+            }
+        }
+
+        function setupNavigation() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const menuLinks = document.querySelectorAll('.sidebar a');
+            
+            menuLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href && href.includes(currentPage)) {
+                    link.classList.add('active');
+                }
+            });
+            
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.classList.contains('logout')) return;
+                    
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href && Auth.validateSession()) {
+                        window.location.href = href;
+                    } else {
+                        window.location.href = 'student-login.html';
+                    }
+                });
+            });
+        }
+
+        function showAlert(message, type) {
+            const existingAlert = document.querySelector('.profile-alert');
+            if (existingAlert) existingAlert.remove();
+            
+            const alert = document.createElement('div');
+            alert.className = `profile-alert alert-${type}`;
+            alert.textContent = message;
+            
+            alert.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 4px;
+                font-size: 14px;
+                font-weight: bold;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease;
+            `;
+            
+            if (type === 'error') {
+                alert.style.backgroundColor = '#ffeef0';
+                alert.style.color = '#ff3860';
+                alert.style.border = '1px solid #ff3860';
+            } else {
+                alert.style.backgroundColor = '#d4edda';
+                alert.style.color = '#155724';
+                alert.style.border = '1px solid #c3e6cb';
+            }
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.style.opacity = '0';
+                alert.style.transition = 'opacity 0.3s';
+                setTimeout(() => alert.remove(), 300);
+            }, 3000);
+        }
+    </script>
+    <script >
+        setInterval(() => {
+            if (typeof Auth !== 'undefined') {
+                Auth.validateSession();
+            }
+        }, 5 * 60 * 1000);
+    </script>
+</head>
+<body>
+
+<header class="top-header">
+    <div class="logo">
+        <img src="../../icons/AAU_logo.png" alt="AAU Logo">
+        <span>5K Dormitory Management System</span>
+    </div>
+    <nav class="home-link">
+        <a href="../../index.html">Home</a>
+    </nav>
+</header>
+
+<div class="sidebar">
+    <div class="menu">
+        <a href="profile.html" class="active">Profile</a>
+        <a href="dorm-application.html">Dorm Application</a>
+        <a href="application-status.html">Application Status</a>
+    </div>
+    <a href="../../index.html" class="logout">Logout</a>
+</div>
+
+<div class="main-content2">
+    <form class="profile-card" id="profileForm">
+
+        <div class="profile-image-section">
+            <div class="profile-image" onclick="document.getElementById('fileInput').click();">
+                <img src="avatar.png" alt="Profile Picture" id="profileDisplay">
+                <div class="image-overlay">Change Photo</div>
+            </div>
+            <input type="file" id="fileInput" accept="image/png, image/jpeg" style="display: none;">
+            <button type="submit" class="savechange-btn">Save Changes</button>
+        </div>
+
+        <div class="profile-info">
+            <h2>Student Information</h2>
+
+            <div class="info-grid">
+                <div>
+                    <label>Student ID</label>
+                    <input type="text" value="STU_001" readonly class="readonly-field">
+                </div>
+
+                <div>
+                    <label>Full Name</label>
+                    <input type="text" value="Dawit Alemu" required>
+                </div>
+
+                <div>
+                    <label>Gender</label>
+                    <select required>
+                        <option value="" disabled>Select Gender</option>
+                        <option value="Male" selected>Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Department</label>
+                    <select required>
+                        <option value="Software E." selected>Software E.</option>
+                        <option value="Mechanical E.">Mechanical E.</option>
+                        <option value="Chemical E.">Chemical E.</option>
+                        <option value="Civil E.">Civil E.</option>
+                        <option value="Electrical E.">Electrical E.</option>
+                        <option value="Biomedical E.">Biomedical E.</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Year</label>
+                    <input type="number" value="2" min="1" max="5" required>
+                </div>
+
+                <div>
+                    <label>Residence Category</label>
+                    <select required>
+                        <option value="" disabled>Select Gender</option>
+                        <option value="Rural " selected>Rural</option>
+                        <option value="AA ">AA</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Phone Number</label>
+                    <input type="tel" value="+251 9XX XXX XXX" required>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<footer class="footer2">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+</body>
+</html>

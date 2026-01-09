@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>System Admin Management</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header class="top-header">
+  <div class="logo">
+    <img src="AAU_logo.png" alt="AAU Logo">
+    <span>5K Dormitory Management System</span>
+  </div>
+  <nav class="home-link">
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<div class="sidebar">
+  <div class="menu">
+    <a href="admin-home.html">Admin-Home</a>
+    <a href="application-overview.html">Application Overview</a>
+    <a href="document-verification.html">Document Verification</a>
+    <a href="dorm-rooms.html">Dorm Room Management</a>
+    <a href="dorm-allocation.html">Dorm Allocation</a>
+    <a href="system-admin.html" class="active">System Admin</a>
+  </div>
+  <a href="admin-login.html" class="logout">Logout</a>
+</div>
+
+<main class="main-content2">
+
+  <!-- CARD 1 : TITLE + BUTTONS -->
+  <section class="card system-admin">
+    <h2 class="page-title">System Admin Management</h2>
+
+    <div class="top-buttons admin-actions">
+      <button>Add Admin</button>
+      <button>Manage Roles</button>
+      <button>Delete Admin</button>
+      <button class="active-btn">Phase Management</button>
+    </div>
+  </section>
+
+  <!-- CARD 2 : PHASE + ANNOUNCEMENT -->
+  <section class="card system-admin">
+
+    <h3 class="title-1">Phase Management</h3>
+
+    <form class="phase-form">
+      <div class="form-group">
+        <label>Phase Type</label>
+        <select required>
+          <option value="">Select Phase</option>
+          <option>Rural Student Registration</option>
+          <option>Addis Ababa Student Registration</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Start Date</label>
+        <input type="date" required>
+      </div>
+
+      <div class="form-group">
+        <label>End Date</label>
+        <input type="date" required>
+      </div>
+
+      <div class="form-group">
+        <label>&nbsp;</label>
+        <button class="primary-btn">Add Phase</button>
+      </div>
+    </form>
+
+    <hr class="divider">
+
+    <h3 class="title-1">Send Phase Announcement</h3>
+
+    <textarea
+      class="announcement-textarea"
+      placeholder="Type announcement message here..."></textarea>
+
+    <div class="announcement-actions">
+      <button class="secondary-btn">Cancel</button>
+      <button class="primary-btn">Send Announcement</button>
+    </div>
+
+  </section>
+
+  <!-- CARD 3 : TABLE -->
+  <section class="card system-admin">
+
+    <h3 class="title-1">Phase History</h3>
+
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Phase Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- dynamic rows -->
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer2">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+</body>
+</html>

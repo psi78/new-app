@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration - 5K Dormitory Management</title>
+    <link rel="stylesheet" href="main.css">
+    <script defer src="student-register.js"> </script>
+    <script defer src="session-monitor.js"></script>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo">
+        <img src="AAU_logo.png" alt="AAU Logo">
+        <span>5K Dormitory Management System</span>
+    </div>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+    </nav>
+</header>
+
+<main class="login-container">
+    <h2>Student Registration</h2>
+
+    <form id="student-register-form" action="/api/register.php" method="POST">
+        
+        <div class="student-id-form">
+            <label for="student-id">Student ID</label>
+            <input type="text" id="student-id" name="student_id" placeholder="Enter your Student ID" required>
+            <span class="error-message"></span>
+        </div>
+
+        <div class="full-name-form">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full_name" placeholder="Enter your full name" required>
+            <span class="error-message"></span>
+        </div>
+
+        <label>Gender</label>
+        <div class="gender-options" id="gender-options-form">
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+
+            <input type="radio" id="female" name="gender" value="Female" required>
+            <label for="female">Female</label>
+            <span class="error-message"></span>
+        </div>
+
+        <div class="academic-year-form">
+            <label for="academic-year">Academic Year</label>
+            <select id="academic-year" name="academic_year" required>
+                <option value="">Select Year</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <span class="error-message"></span>
+        </div>
+
+        <div class="department-form">
+            <label for="department">Department</label>
+            <select id="department" name="department" required>
+                <option value="">Select Department</option>
+                <option value="Software E.">Software E.</option>
+                <option value="Mechanical E.">Mechanical E.</option>
+                <option value="Chemical E.">Chemical E.</option>
+                <option value="Civil E.">Civil E.</option>
+                <option value="Electrical E.">Electrical E.</option>
+                <option value="Biomedical E.">Biomedical E.</option>
+            </select>
+        </div>
+
+
+        <div class="phone-form">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+251911..." required 
+                pattern="^\+251[0-9]{9}$">
+            <span class="error-message"></span>
+        </div>
+
+        <div class="password-form">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password" required>
+            <span class="error-message"></span>
+        </div>
+
+        <div class="confirm-password-form">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm password" required>
+            <span class="error-message"></span>
+        </div>
+
+        <button type="submit" class="btn login-btn" id="register-submit">Register</button>
+
+        <p class="login-link">
+            Already have an account? <a href="student-login.html">Login</a>
+        </p>
+    </form>
+</main>
+
+<footer class="main-footer">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+</body>
+</html>

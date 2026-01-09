@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Status | 5K DMS</title>
+    <link rel="stylesheet" href="main.css">
+    <script defer src="navigation-guard.js"></script>
+    <script defer src="session-monitor.js"></script>
+</head>
+<body>
+
+<header class="top-header">
+    <div class="logo">
+        <img src="AAU_logo.png" alt="AAU Logo">
+        <span>5K Dormitory Management System</span>
+    </div>
+    <nav class="home-link">
+        <a href="index.html">Home</a>
+    </nav>
+</header>
+
+<div class="sidebar">
+    <div class="menu">
+        <a href="profile.html">Profile</a>
+        <a href="dorm-application.html">Dorm Application</a>
+        <a href="application-status.html" class="active">Application Status</a>
+    </div>
+    <a href="index.html" class="logout">Logout</a>
+</div>
+
+<main class="main-content2">
+    <div class="status-header-section">
+        <h2>Application Status</h2>
+        <div id="statusBanner" class="status-banner pending">
+            Status: Pending
+        </div>
+    </div>
+
+    <div class="status-cards-row">
+        <div class="card">
+            <h3>Application Details</h3>
+            <table class="status-table">
+                <tr><th>Application ID</th><td id="appID">APP-2025-0142</td></tr>
+                <tr><th>Student Name</th><td id="studentName">Dawit Bekele</td></tr>
+                <tr><th>Category</th><td id="category">Rural</td></tr>
+                <tr><th>Academic Year</th><td id="academicYear">Year 1</td></tr>
+                <tr><th>Department</th><td id="department">Software Engineering</td></tr>
+                <tr><th>Last Updated</th><td id="lastUpdated">Nov 18, 2025</td></tr>
+                <tr><th>Admin Remark</th><td id="adminRemark">Waiting for document review</td></tr>
+            </table>
+        </div>
+
+        <div class="card muted">
+            <h3>Dorm Allocation</h3>
+            <div id="allocationContainer" class="allocation-placeholder">
+                <p>No dorm has been allocated yet.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer2">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5K Dormitory Management System</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo">
+        <img src="AAU_logo.png" alt="AAU Logo">
+        <span>5K Dormitory Management System</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+    </nav>
+</header>
+
+
+<main class="main-content">
+    <h1 class="hero">Welcome to the 5K Dormitory Management System</h1>
+    <p class="description">
+        Apply for your dorm online, track your status,
+        and get updates instantly.
+    </p>
+
+    <div class="button-group">
+        <a href="student-login.html" class="btn student-btn">
+            Student Login
+        </a>
+
+        <a href="admin-login.html" class="btn admin-btn">
+            Admin Login
+        </a>
+    </div>
+</main>
+
+
+<section id="about" class="info-section">
+    <h2>About the System</h2>
+    <p>
+        The 5K Dormitory Management System is designed to streamline the dorm
+        application process by enabling online registration, document submission,
+        verification, and transparent dorm allocation. The system reduces manual
+        workload, improves fairness, and enhances student experience.
+    </p>
+</section>
+
+<section id="faq" class="info-section">
+    <h2>Frequently Asked Questions (FAQ)</h2>
+
+    <div class="faq-item">
+        <strong>Who can apply for dormitories?</strong>
+        <p>All eligible Addis Ababa University students during an active application phase.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>How do I know my application status?</strong>
+        <p>After logging in, your dashboard will show the current status of your application.</p>
+    </div>
+
+    <div class="faq-item">
+        <strong>Who verifies documents and allocates dorms?</strong>
+        <p>Authorized dorm administrators handle verification and dorm allocation.</p>
+    </div>
+</section>
+
+<section class="announcement-section">
+    <h2>📢 Announcements</h2>
+
+    <div id="dynamicAnnouncementContainer" class="announcement-cards">
+        
+        <div class="announcement-card">
+            <h4 id="announcementTitle1">Rural Application Phase Open</h4>
+            <p id="announcementBody1">The rural student application phase will open on November 15, 2025.</p>
+            <span class="announcement-meta">Posted by System Admin</span>
+        </div>
+
+        <div class="announcement-card">
+            <h4 id="announcementTitle2">Document Verification Update</h4>
+            <p id="announcementBody2">Students are advised to ensure all documents (JPEG, PNG, or PDF) are clear and valid for the verification process.</p>
+            <span class="announcement-meta">Posted by System Admin</span>
+        </div>
+        
+    </div>
+</section>
+<script>
+    const API_URL = "http://localhost:3000";
+
+    async function loadAnnouncements() {
+        const container = document.getElementById('dynamicAnnouncementContainer');
+        if (!container) return;
+
+        try {
+            const res = await fetch(`${API_URL}/publicAnnouncements`);
+            const data = await res.json();
+
+            // Only clear the container if we actually have data from the server
+            if (data && data.length > 0) {
+                container.innerHTML = data.reverse().map(a => `
+                    <div class="announcement-card">
+                        <h4>${a.type}</h4>
+                        <p>${a.text}</p>
+                        <span class="announcement-meta">Posted on: ${a.date} | by System Admin</span>
+                    </div>
+                `).join('');
+            }
+        } catch (e) {
+            console.error("Could not load live announcements:", e);
+            // If server is down, it will keep the hardcoded HTML placeholders
+        }
+    }
+
+    // Load announcements when the page opens
+    window.addEventListener('DOMContentLoaded', loadAnnouncements);
+</script>
+
+
+<footer class="main-footer">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+</body>
+</html>

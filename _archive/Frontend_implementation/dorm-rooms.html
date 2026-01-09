@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dorm Room Management | 5K DMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="top-header">
+  <div class="logo">
+    <img src="AAU_logo.png" alt="AAU Logo">
+    <span>5K Dormitory Management System</span>
+  </div>
+  <nav class="home-link">
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="menu">
+    <a href="admin-home.html">Admin-Home</a>
+    <a href="application-overview.html">Application Overview</a>
+    <a href="document-verification.html">Document Verification</a>
+    <a href="dorm-rooms.html" class="active">Dorm Room Management</a>
+    <a href="dorm-allocation.html">Dorm Allocation</a>
+    <a href="system-admin.html">System Admin</a>
+  </div>
+  <a href="admin-login.html" class="logout">Logout</a>
+</div>
+
+<!-- Main Content Wrapper -->
+<div class="main-content2">
+  <div class="card">
+
+    <!-- Page Title -->
+    <h2 class="page-title">Dorm Room Management</h2>
+
+    <!-- Action Buttons -->
+    <div class="top-buttons">
+      <button id="addRoomBtn">Add Room</button>
+      <button id="editRoomBtn">Edit Room</button>
+      <button id="deleteRoomBtn">Delete Room</button>
+      <button id="exportCsvBtn">Export CSV</button>
+      <button id="refreshBtn">Refresh</button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-search">
+      <div class="filter-group">
+        <label for="filterDormBlock">Dorm Block</label>
+        <select id="filterDormBlock">
+          <option value="">All</option>
+          <option value="male">Male Block</option>
+          <option value="female">Female Block</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterStatus">Status</label>
+        <select id="filterStatus">
+          <option value="">All</option>
+          <option value="empty">Empty</option>
+          <option value="available">Available</option>
+          <option value="full">Full</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="searchRoomInput">Search</label>
+        <input type="text" id="searchRoomInput" placeholder="Search by room number" />
+      </div>
+
+      <div class="filter-group reset-group">
+        <label>&nbsp;</label>
+        <button id="resetFilters">Reset</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="selectAllRooms" /></th>
+            <th>Room Number</th>
+            <th>Dorm Block</th>
+            <th>Capacity</th>
+            <th>Occupied</th>
+            <th>Remaining</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="dormTableBody">
+          <!-- Data will come from backend -->
+        </tbody>
+      </table>
+      <div id="noDormResults" style="display:none; text-align:center; margin-top:15px;">
+        No dorms found.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer2">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+<!-- Modals -->
+
+<!-- Add Room Modal -->
+<div id="addRoomModal" class="modal">
+  <div class="modal-content">
+    <h3>Add Dorm Room</h3>
+    <div class="form-grid">
+      <div class="filter-group">
+        <label for="addDormBlock">Dorm Block</label>
+        <select id="addDormBlock" required>
+          <option value="">Select Block</option>
+          <option value="male">Male Block</option>
+          <option value="female">Female Block</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="addRoomNumber">Room Number</label>
+        <input type="text" id="addRoomNumber" placeholder="Enter Room Number" required>
+      </div>
+      <div class="filter-group">
+        <label for="addCapacity">Capacity</label>
+        <input type="number" id="addCapacity" placeholder="Enter Capacity" required>
+      </div>
+      <div class="filter-group">
+        <label for="addStatus">Status</label>
+        <select id="addStatus" required>
+          <option value="">Select Status</option>
+          <option value="empty">Empty</option>
+          <option value="available">Available</option>
+          <option value="full">Full</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="cancel-btn" onclick="closeModal('addRoomModal')">Close</button>
+      <button class="verify-btn" id="addSaveBtn">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Room Modal -->
+<div id="editRoomModal" class="modal">
+  <div class="modal-content">
+    <h3>Edit Dorm Room</h3>
+    <div class="form-grid">
+      <div class="filter-group">
+        <label for="editDormBlock">Dorm Block</label>
+        <select id="editDormBlock" required>
+          <option value="">Select Block</option>
+          <option value="male">Male Block</option>
+          <option value="female">Female Block</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="editRoomNumber">Room Number</label>
+        <input type="text" id="editRoomNumber" placeholder="Enter Room Number" required>
+      </div>
+      <div class="filter-group">
+        <label for="editCapacity">Capacity</label>
+        <input type="number" id="editCapacity" placeholder="Enter Capacity" required>
+      </div>
+      <div class="filter-group">
+        <label for="editStatus">Status</label>
+        <select id="editStatus" required>
+          <option value="">Select Status</option>
+          <option value="empty">Empty</option>
+          <option value="available">Available</option>
+          <option value="full">Full</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="cancel-btn" onclick="closeModal('editRoomModal')">Close</button>
+      <button class="verify-btn" id="editSaveBtn">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Room Modal -->
+<div id="deleteRoomModal" class="modal">
+  <div class="modal-content">
+    <h3>Confirm Deletion</h3>
+    <p>Are you sure you want to delete this dorm room?</p>
+    <div class="modal-actions">
+      <button class="cancel-btn" onclick="closeModal('deleteRoomModal')">No</button>
+      <button class="reject-btn" id="deleteConfirmBtn">Yes</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

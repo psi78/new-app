@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dorm Allocation</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<header class="top-header">
+  <div class="logo">
+    <img src="AAU_logo.png" alt="AAU Logo">
+    <span>5K Dormitory Management System</span>
+  </div>
+  <nav class="home-link">
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="menu">
+    <a href="admin-home.html">Admin-Home</a>
+    <a href="application-overview.html">Application Overview</a>
+    <a href="document-verification.html">Document Verification</a>
+    <a href="dorm-rooms.html">Dorm Room Management</a>
+    <a href="dorm-allocation.html" class="active">Dorm Allocation</a>
+    <a href="system-admin.html">System Admin</a>
+  </div>
+  <a href="admin-login.html" class="logout">Logout</a>
+</div>
+
+<div class="main-content2">
+
+  <div class="card">
+    <!-- Page Title -->
+    <h2 class="page-title">Dorm Allocation</h2>
+
+    <!-- Top Buttons -->
+    <div class="top-buttons">
+      <button id="setRulesBtn">Set Allocation Rules</button>
+      <button id="runAllocationBtn">Run Allocation</button>
+      <button id="generateReportBtn">Generate Report</button>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="filters-search">
+      <div class="filter-group">
+        <label for="filterGender">Gender</label>
+        <select id="filterGender">
+          <option value="">All</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterCategory">Category</label>
+        <select id="filterCategory">
+          <option value="">All</option>
+          <option value="general">General</option>
+          <option value="priority">Priority</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterStatus">Status</label>
+        <select id="filterStatus">
+          <option value="">All</option>
+          <option value="allocated">Allocated</option>
+          <option value="pending">Pending</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="searchStudentInput">Search</label>
+        <input type="text" id="searchStudentInput" placeholder="Search by student ID or Name" />
+      </div>
+
+      <div class="filter-group reset-group">
+        <label>&nbsp;</label>
+        <button id="resetFilters">Reset</button>
+      </div>
+    </div>
+
+    <!-- Allocation Table -->
+    <div class="table-container">
+      <table class="data-table allocation-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="selectAllStudents" /></th>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Department</th>
+            <th>Category</th>
+            <th>Room Number</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="allocationTableBody">
+          <!-- Allocation data will be dynamically populated here -->
+        </tbody>
+      </table>
+      <div id="noAllocationResults" style="display:none; text-align:center; margin-top:15px; color:#555;">
+        No students found.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer2">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+<!-- Set Allocation Rules Modal -->
+<div id="rulesModal" class="modal">
+  <div class="modal-content">
+    <h3>Set Allocation Rules</h3>
+    
+    <div class="rules-checkboxes">
+      <label><input type="checkbox" id="ruleGender" value="gender"> Gender Separation</label>
+      <label><input type="checkbox" id="ruleMedical" value="medical"> Medical Priority</label>
+      <label><input type="checkbox" id="rule75percent" value="75percent"> 75% Rule Compliance</label>
+      <label><input type="checkbox" id="ruleDistance" value="distance"> Distance Priority</label>
+      <label><input type="checkbox" id="ruleRural" value="rural"> Rural Priority</label>
+    </div>
+    
+    <div class="modal-actions">
+      <button class="cancel-btn" onclick="closeModal('rulesModal')">Cancel</button>
+      <button class="verify-btn" id="saveRulesBtn">Save</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

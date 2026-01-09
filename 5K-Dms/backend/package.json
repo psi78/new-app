@@ -1,0 +1,26 @@
+{
+  "name": "5k-dms-backend",
+  "version": "1.0.0",
+  "description": "5K Dormitory Management System - Backend API",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": ["dormitory", "management", "api"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.0.2",
+    "mysql2": "^3.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22"
+  }
+}

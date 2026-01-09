@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>5K DMS | Dorm Application</title>
+    <link rel="stylesheet" href="main.css">
+    <script defer src="navigation-guard.js"></script>
+    <script defer src="session-monitor.js"></script>
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">
+            <img src="AAU_logo.png" alt="AAU Logo">
+            <span>5K Dormitory Management System</span>
+        </div>
+        <nav class="home-link">
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+
+    <div class="sidebar">
+        <div class="menu">
+            <a href="profile.html">Profile</a>
+            <a href="dorm-application.html" class="active">Dorm Application</a>
+            <a href="application-status.html">Application Status</a>
+        </div>
+        <a href="index.html" class="logout">Logout</a>
+    </div>
+
+    <main class="main-content2">
+        <form class="application-card" id="dormAppForm" action="submit_application.php" method="POST" enctype="multipart/form-data">
+
+            <h2>Dorm Application Form</h2>
+            <p class="note">Please complete all required sections carefully before submission.</p>
+
+            <section class="section">
+                <h3>Select Residency Category</h3>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="residency_category" value="Rural" required />
+                        Rural Student
+                    </label>
+                    <label>
+                        <input type="radio" name="residency_category" value="Addis Ababa" required />
+                        Addis Ababa Student
+                    </label>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3>Residence Details (Addis Ababa Only)</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="subcity">Subcity</label>
+                        <select id="subcity" name="subcity">
+                            <option value="">Select subcity</option>
+                            <option value="Addis Ketema">Addis Ketema</option>
+                            <option value="Akaky Kaliti">Akaky Kaliti</option>
+                            <option value="Arada">Arada</option>
+                            <option value="Bole">Bole</option>
+                            <option value="Gullele">Gullele</option>
+                            <option value="Kirkos">Kirkos</option>
+                            <option value="Kolfe Keranio">Kolfe Keranio</option>
+                            <option value="Lideta">Lideta</option>
+                            <option value="Nifas Silk-Lafto">Nifas Silk-Lafto</option>
+                            <option value="Yeka">Yeka</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="woreda">Woreda</label>
+                        <select id="woreda" name="woreda">
+                            <option value="">Select woreda</option>
+                            <option value="1">1</option><option value="2">2</option>
+                            <option value="3">3</option><option value="4">4</option>
+                            <option value="5">5</option><option value="6">6</option>
+                            <option value="7">7</option><option value="8">8</option>
+                            <option value="9">9</option><option value="10">10</option>
+                            <option value="11">11</option><option value="12">12</option>
+                            <option value="13">13</option><option value="14">14</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="hint">Addis Ababa students are ranked based on distance priority.</p>
+            </section>
+
+            <section class="section">
+                <h3>Upload Required Documents</h3>
+                <div class="upload-group">
+                    <label>Kebele ID (Both Rural & AA Students)</label>
+                    <input type="file" name="kebele_id" accept=".png, .jpg, .jpeg" required />
+                    <small>PNG / JPG formats only</small>
+                </div>
+                <div class="upload-group">
+                    <label>Supporting Letter (Woreda/Subcity)</label>
+                    <input type="file" name="support_letter" accept=".pdf, .png" required />
+                    <small>PDF / PNG formats</small>
+                </div>
+                <div class="upload-group">
+                    <label>Medical Document (Optional)</label>
+                    <input type="file" name="medical_doc" accept=".pdf, .png" />
+                    <small>PDF / PNG formats</small>
+                </div>
+            </section>
+
+            <section class="section confirm">
+                <label class="confirm-label">
+                    <input type="checkbox" name="terms_confirm" required />
+                    I confirm that the information provided is correct.
+                </label>
+            </section>
+
+            <button type="submit" class="submit-btn">Submit Application</button>
+
+        </form>
+    </main>
+
+    <footer class="footer2">
+        <p>📍 Addis Ababa University, 5K Campus</p>
+        <p>📞 Contact: +251-11-123-4567</p>
+        <p>📧 Email: dormitory@aau.edu.et</p>
+        <p>© 2025 Addis Ababa University</p>
+    </footer>
+
+</body>
+</html>

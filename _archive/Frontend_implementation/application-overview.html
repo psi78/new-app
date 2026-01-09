@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Overview | 5K DMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="top-header">
+  <div class="logo">
+    <img src="AAU_logo.png" alt="AAU Logo">
+    <span>5K Dormitory Management System</span>
+  </div>
+  <nav class="home-link">
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="menu">
+    <a href="admin-home.html">Admin-Home</a>
+    <a href="application-overview.html" class="active">Application Overview</a>
+    <a href="document-verification.html">Document Verification</a>
+    <a href="dorm-rooms.html">Dorm Room Management</a>
+    <a href="dorm-allocation.html">Dorm Allocation</a>
+    <a href="system-admin.html">System Admin</a>
+  </div>
+  <a href="admin-login.html" class="logout">Logout</a>
+</div>
+
+<!-- Main Content -->
+<main class="main-content2">
+  <div class="card">
+    <h2 class="page-title">Application Overview</h2>
+    <!-- Top Buttons -->
+    <div class="top-buttons">
+      <button id="importBtn">Import Registrar List</button>
+      <button id="matchBtn">Match Record</button>
+      <button id="refreshBtn">Refresh</button>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="filters-search">
+      <div class="filter-group">
+        <label for="categoryFilter">Category</label>
+        <select id="categoryFilter">
+          <option value="">All</option>
+          <option value="Rural">Rural</option>
+          <option value="Addis Ababa">Addis Ababa</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="genderFilter">Gender</label>
+        <select id="genderFilter">
+          <option value="">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="yearFilter">Year</label>
+        <select id="yearFilter">
+          <option value="">All</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <div class="filter-group search-group">
+        <label for="searchInput">Search</label>
+        <input type="text" id="searchInput" placeholder="Search by ID or Name">
+      </div>
+
+      <div class="filter-group reset-group">
+        <label>&nbsp;</label>
+        <button id="resetFilters">Reset</button>
+      </div>
+    </div>
+
+    <!-- Applications Table -->
+    <div class="table-container">
+      <table class="data-table applicationsTable">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Department</th>
+            <th>Year</th>
+            <th>Category</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="applicationsBody">
+          <!-- Rows will be dynamically inserted here with data-id -->
+          <!-- Example row template:
+          <tr data-id="12345">
+            <td>12345</td>
+            <td>John Doe</td>
+            <td>Male</td>
+            <td>Computer Science</td>
+            <td>2</td>
+            <td>Rural</td>
+            <td>Pending</td>
+          </tr>
+          -->
+        </tbody>
+      </table>
+      <div id="noResults" style="display:none; text-align:center; margin-top:15px; color:#555;">
+        No applications found.
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer2">
+    <p>📍 Addis Ababa University, 5K Campus</p>
+    <p>📞 Contact: +251-11-123-4567</p>
+    <p>📧 Email: dormitory@aau.edu.et</p>
+    <p>© 2025 Addis Ababa University</p>
+</footer>
+
+</body>
+</html>

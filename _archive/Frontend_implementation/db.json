@@ -1,0 +1,110 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "studentId": "STU_001",
+      "fullName": "Dawit Alemu",
+      "gender": "Female",
+      "department": "Mechanical E.",
+      "academicYear": 2,
+      "phone": "+251 9XX XXX XXX",
+      "residenceCategory": "Rural",
+      "profilePicture": "/uploads/profiles/profile-1767298887047-498863571.jpg",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2026-01-01T20:21:27.064Z"
+    },
+    {
+      "id": "1767299818672_profile",
+      "studentId": "STU_002",
+      "fullName": "MUFARIHAT TADESSE",
+      "gender": "Female",
+      "department": "Software E.",
+      "academicYear": 3,
+      "phone": "+251917772656",
+      "residenceCategory": "",
+      "profilePicture": null,
+      "createdAt": "2026-01-01T20:36:58.672Z",
+      "updatedAt": "2026-01-01T20:36:58.672Z"
+    }
+  ],
+  "studentAccounts": [
+    {
+      "id": "1",
+      "studentId": "STU_001",
+      "student_id": "STU_001",
+      "password": "password123",
+      "fullName": "Dawit Alemu",
+      "gender": "Female",
+      "academicYear": 2,
+      "department": "Mechanical E.",
+      "phone": "+251 9XX XXX XXX",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "1767299818672",
+      "studentId": "STU_002",
+      "student_id": "STU_002",
+      "password": "password123",
+      "fullName": "MUFARIHAT TADESSE",
+      "gender": "Female",
+      "academicYear": 3,
+      "department": "Software E.",
+      "phone": "+251917772656",
+      "createdAt": "2026-01-01T20:36:58.672Z"
+    }
+  ],
+  "applications": [],
+  "adminRegistry": [
+    {
+      "id": "sysadmin",
+      "pass": "admin123",
+      "role": "SYSTEM",
+      "perms": [
+        "SYSTEM",
+        "HOME"
+      ]
+    },
+    {
+      "id": "7469",
+      "adminId": "dorm_01",
+      "name": "Nanat Abeshu",
+      "phone": "0924433238",
+      "pass": "nanat",
+      "role": "DORM",
+      "perms": [
+        "HOME",
+        "OVERVIEW"
+      ]
+    },
+    {
+      "id": "3160",
+      "adminId": "dorm_02",
+      "name": "Nanat Abeshu",
+      "phone": "",
+      "pass": "nanat",
+      "role": "DORM",
+      "perms": [
+        "HOME",
+        "VERIFY"
+      ]
+    }
+  ],
+  "publicAnnouncements": [
+    {
+      "id": "1991",
+      "text": "Now accepting applications for rural student dormitory registration for the academic year 2025-2026. Apply now to secure your spot!",
+      "date": "12/29/2025",
+      "type": "Update"
+    }
+  ],
+  "phases": [
+    {
+      "id": "3098",
+      "type": "Rural Student Registration",
+      "start": "2025-12-29",
+      "end": "2025-12-31",
+      "status": "Active",
+      "createdAt": "2025-12-29T10:31:53.576Z"
+    }
+  ]
+}

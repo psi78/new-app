@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile | 5K DMS</title>
+    <link rel="stylesheet" href="main.css" />
+    <script defer src="auth.js"></script>
+    <script defer src="profile.js"></script>
+    <script defer src="navigation-guard.js"></script>
+    <script defer src="session-monitor.js"></script>
+  </head>
+  <body>
+    <header class="top-header">
+      <div class="logo">
+        <img src="AAU_logo.png" alt="AAU Logo" />
+        <span>5K Dormitory Management System</span>
+      </div>
+      <nav class="home-link">
+        <a href="index.html">Home</a>
+      </nav>
+    </header>
+
+    <div class="sidebar">
+      <div class="menu">
+        <a href="profile.html" class="active">Profile</a>
+        <a href="dorm-application.html">Dorm Application</a>
+        <a href="application-status.html">Application Status</a>
+      </div>
+      <a href="index.html" class="logout">Logout</a>
+    </div>
+
+    <div class="main-content2">
+      <form class="profile-card" id="profileForm">
+        <div class="profile-image-section">
+          <div
+            class="profile-image"
+            onclick="document.getElementById('fileInput').click();"
+          >
+            <img src="avatar.png" alt="Profile Picture" id="profileDisplay" />
+            <div class="image-overlay">Change Photo</div>
+          </div>
+          <input
+            type="file"
+            id="fileInput"
+            accept="image/png, image/jpeg"
+            style="display: none"
+          />
+          <button type="submit" class="savechange-btn">Save Changes</button>
+        </div>
+
+        <div class="profile-info">
+          <h2>Student Information</h2>
+
+          <div class="info-grid">
+            <div>
+              <label>Student ID</label>
+              <input
+                type="text"
+                value="STU_001"
+                readonly
+                class="readonly-field"
+              />
+            </div>
+
+            <div>
+              <label>Full Name</label>
+              <input type="text" value="Dawit Alemu" required />
+            </div>
+
+            <div>
+              <label>Gender</label>
+              <select required>
+                <option value="" disabled>Select Gender</option>
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Department</label>
+              <select required>
+                <option value="Software E." selected>Software E.</option>
+                <option value="Mechanical E.">Mechanical E.</option>
+                <option value="Chemical E.">Chemical E.</option>
+                <option value="Civil E.">Civil E.</option>
+                <option value="Electrical E.">Electrical E.</option>
+                <option value="Biomedical E.">Biomedical E.</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Year</label>
+              <input type="number" value="2" min="1" max="5" required />
+            </div>
+
+            <div>
+              <label>Residence Category</label>
+              <select required>
+                <option value="" disabled>Select Residence Category</option>
+                <option value="Rural" selected>Rural</option>
+                <option value="AA">AA</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Phone Number</label>
+              <input type="tel" value="+251 9XX XXX XXX" required />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <footer class="footer2">
+      <p>📍 Addis Ababa University, 5K Campus</p>
+      <p>📞 Contact: +251-11-123-4567</p>
+      <p>📧 Email: dormitory@aau.edu.et</p>
+      <p>© 2025 Addis Ababa University</p>
+    </footer>
+  </body>
+</html>

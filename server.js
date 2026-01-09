@@ -406,7 +406,7 @@ async function initDb() {
     if (adminCheck.length === 0) {
       const hash = await bcrypt.hash("admin123", 10);
       await query("INSERT INTO admin_registry (admin_id, password, name, phone, role, perms) VALUES (?, ?, ?, ?, ?, ?)",
-        ["sysadmin", hash, "System Admin", "0911000000", "System Admin", JSON.stringify(["HOME"])]);
+        ["sysadmin", hash, "System Admin", "0911000000", "System Admin", JSON.stringify(["HOME", "SYS_ADMIN"])]);
       console.log("✅ Default 'sysadmin' account created.");
     }
   } catch (error) {
@@ -426,7 +426,7 @@ app.get("/api/fixCloud", async (req, res) => {
     await initDb();
 
     // Check if sysadmin exists now
-    const [users] = await query("SELECT * FROM admin_registry");
+    const users = await query("SELECT * FROM admin_registry");
     res.json({
       success: true,
       message: "Database initialization attempted.",

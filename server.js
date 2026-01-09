@@ -416,7 +416,8 @@ async function initDb() {
 }
 
 // Run DB Init
-initDb();
+// Run DB Init (catch error so server doesn't crash on startup)
+initDb().catch(err => console.log("Initial DB Init failed, waiting for manual fixCloud trigger."));
 
 // --- RESCUE ROUTE FOR CLOUD ---
 app.get("/api/fixCloud", async (req, res) => {

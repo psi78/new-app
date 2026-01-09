@@ -176,7 +176,10 @@ app.post("/api/adminRegistry", async (req, res) => {
     const pStr = JSON.stringify(perms || []);
     await query("INSERT INTO admin_registry (admin_id, password, name, phone, role, perms) VALUES (?,?,?,?,?,?)", [adminId, hashedPassword, name, phone, role || 'Admin', pStr]);
     res.status(201).json({ success: true, message: "Admin created" });
-  } catch (e) { res.status(500).json({ error: "Server error" }); }
+  } catch (e) {
+    console.error("Add Admin Error:", e);
+    res.status(500).json({ error: "Server error: " + e.message });
+  }
 });
 
 app.patch("/api/adminRegistry/:id", async (req, res) => {
@@ -406,7 +409,7 @@ async function initDb() {
     if (adminCheck.length === 0) {
       const hash = await bcrypt.hash("admin123", 10);
       await query("INSERT INTO admin_registry (admin_id, password, name, phone, role, perms) VALUES (?, ?, ?, ?, ?, ?)",
-        ["sysadmin", hash, "System Admin", "0911000000", "System Admin", JSON.stringify(["HOME", "SYS_ADMIN"])]);
+        ["sysadmin", hash, "System Admin", "0911000000", "SYSTEM", JSON.stringify(["HOME", "SYS_ADMIN"])]);
       console.log("✅ Default 'sysadmin' account created.");
     }
   } catch (error) {
@@ -425,8 +428,8 @@ app.get("/api/fixCloud", async (req, res) => {
     console.log("Manual fix triggered...");
     await initDb();
 
-    // Force update sysadmin permissions to include SYS_ADMIN
-    await query(`UPDATE admin_registry SET perms = ? WHERE admin_id = 'sysadmin'`,
+    // Force update sysadmin role and permissions
+    await query(`UPDATE admin_registry SET role = 'SYSTEM', perms = ? WHERE admin_id = 'sysadmin'`,
       [JSON.stringify(["HOME", "SYS_ADMIN"])]);
 
     // Check if sysadmin exists now

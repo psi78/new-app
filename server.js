@@ -411,6 +411,7 @@ async function initDb() {
     }
   } catch (error) {
     console.error("Database initialization failed:", error);
+    throw error; // RETHROW SO FIXCLOUD CATCHES IT
   }
 }
 
@@ -431,13 +432,22 @@ app.get("/api/fixCloud", async (req, res) => {
       adminCount: users ? users.length : 0,
       admins: users ? users.map(u => u.admin_id) : []
     });
+  });
   } catch (e) {
-    res.status(500).json({
-      success: false,
-      error: e.message,
-      tip: "Check your settings in Railway (DB_HOST, DB_USER, etc). The App cannot talk to the Database."
-    });
-  }
+  res.status(500).json({
+    success: false,
+    error: e.message || "Unknown Error",
+    code: e.code || "No Code",
+    details: {
+      host: process.env.DB_HOST ? "Set" : "Missing",
+      user: process.env.DB_USER ? "Set" : "Missing",
+      pass: process.env.DB_PASSWORD ? "Set" : "Missing",
+      db: process.env.DB_NAME ? "Set" : "Missing",
+      port: process.env.PORT ? process.env.PORT : "Missing"
+    },
+    tip: "Check the 'details' above. If any say 'Missing', you forgot to add them in Railway Variables."
+  });
+}
 });
 
 

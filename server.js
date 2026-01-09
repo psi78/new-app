@@ -417,7 +417,29 @@ async function initDb() {
 // Run DB Init
 initDb();
 
-// --- CRITICAL ADMINISTRATIVE ROUTES (Top Priority) ---
+// --- RESCUE ROUTE FOR CLOUD ---
+app.get("/api/fixCloud", async (req, res) => {
+  try {
+    console.log("Manual fix triggered...");
+    await initDb();
+
+    // Check if sysadmin exists now
+    const [users] = await query("SELECT * FROM admin_registry");
+    res.json({
+      success: true,
+      message: "Database initialization attempted.",
+      adminCount: users ? users.length : 0,
+      admins: users ? users.map(u => u.admin_id) : []
+    });
+  } catch (e) {
+    res.status(500).json({
+      success: false,
+      error: e.message,
+      tip: "Check your settings in Railway (DB_HOST, DB_USER, etc). The App cannot talk to the Database."
+    });
+  }
+});
+
 
 
 app.get("/", (req, res) => {
